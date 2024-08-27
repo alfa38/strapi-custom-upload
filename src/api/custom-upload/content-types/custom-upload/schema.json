@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "custom_uploads",
+  "info": {
+    "singularName": "custom-upload",
+    "pluralName": "custom-uploads",
+    "displayName": "customUpload"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "blank": {
+      "type": "string"
+    }
+  }
+}
