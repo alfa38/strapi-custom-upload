@@ -1,7 +1,8 @@
-/**
- *  controller
- */
+import _ from 'lodash';
 
-import { factories } from '@strapi/strapi'
-
-export default factories.createCoreController('plugin::custom-upload.storage-link');
+export default {
+  getAllTargets: async () => {
+    let targets = _.clone(await strapi.db.query('plugin::custom-upload.custom-upload').findMany()).map((target) => target.name);
+    return targets;
+  }
+}

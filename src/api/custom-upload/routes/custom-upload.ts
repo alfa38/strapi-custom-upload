@@ -3,7 +3,7 @@ export default  {
     {
       method: 'GET',
       path: '/root-files/:subDirectory/:fileName',
-      handler: 'api::custom-upload.custom-upload.getBaseFiles',
+      handler: 'plugin::custom-upload.custom-upload.getBaseFiles',
         config: {
         policies: [],
         auth: false,
@@ -12,7 +12,16 @@ export default  {
     {
       method: 'GET',
       path: '/root-files/:subDirectory/:subdir2/:fileName',
-      handler: 'api::custom-upload.custom-upload.getBaseFiles',
+      handler: 'plugin::custom-upload.custom-upload.getBaseFiles',
+        config: {
+        policies: [],
+        auth: false,
+      },
+    },
+    {
+      method: 'GET',
+      path: '/root-files/:subDirectory/:subdir2/:subdir3/:fileName',
+      handler: 'plugin::custom-upload.custom-upload.getBaseFiles',
         config: {
         policies: [],
         auth: false,

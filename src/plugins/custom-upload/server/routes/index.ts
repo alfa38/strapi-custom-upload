@@ -1,5 +1,5 @@
-import customUpload from "./custom-upload";
+import storageTarget from "./storage-target";
 
 export default {
-  customUpload,
+  storageTarget,
 }

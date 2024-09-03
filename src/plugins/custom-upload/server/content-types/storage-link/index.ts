@@ -4,7 +4,7 @@ export default {
   "info": {
     "singularName": "custom-upload",
     "pluralName": "storage-links",
-    "displayName": "storageLink"
+    "displayName": "storage-link"
   },
   "options": {
     "draftAndPublish": false,

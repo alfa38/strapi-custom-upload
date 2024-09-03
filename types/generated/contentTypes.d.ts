@@ -595,7 +595,7 @@ export interface PluginCustomUploadCustomUpload extends Schema.CollectionType {
   info: {
     singularName: 'custom-upload';
     pluralName: 'storage-links';
-    displayName: 'storageLink';
+    displayName: 'storage-link';
   };
   options: {
     draftAndPublish: false;
@@ -615,6 +615,36 @@ export interface PluginCustomUploadCustomUpload extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'plugin::custom-upload.custom-upload',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface PluginCustomUploadTargetLink extends Schema.SingleType {
+  collectionName: 'target-link';
+  info: {
+    singularName: 'target-link';
+    pluralName: 'custom-upload-targets';
+    displayName: 'target-link';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    selection: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::custom-upload.target-link',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::custom-upload.target-link',
       'oneToOne',
       'admin::user'
     > &
@@ -929,6 +959,7 @@ declare module '@strapi/types' {
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::custom-upload.custom-upload': PluginCustomUploadCustomUpload;
+      'plugin::custom-upload.target-link': PluginCustomUploadTargetLink;
       'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;

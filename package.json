@@ -18,13 +18,15 @@
     "@strapi/plugin-users-permissions": "4.25.4",
     "@strapi/strapi": "4.25.4",
     "@types/koa": "^2.15.0",
+    "@types/koa-bodyparser": "^4.3.12",
     "base-64": "^1.0.0",
     "better-sqlite3": "8.6.0",
     "js-base64": "^3.7.7",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "5.3.4",
-    "styled-components": "5.3.3"
+    "styled-components": "5.3.3",
+	  "strapi-provider-custom-upload": "file:providers/strapi-provider-custom-upload/"
   },
   "author": {
     "name": "A Strapi developer"
