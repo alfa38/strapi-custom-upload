@@ -1,51 +1,31 @@
 // @ts-nocheck
-import koa from 'koa';
-import _ from 'lodash';
+
+import { Strapi } from '@strapi/strapi';
+import { IRequest } from './types';
+import { getFirstEntry} from './utils';
 
 export default {
   getCurrentTarget: async () => {
-    let currentTarget = _.clone(await strapi.db.query('plugin::custom-upload.target-link').findOne());
+    let currentTarget = await getFirstEntry('plugin::custom-upload.target-link'); // should be only one entry
     if (currentTarget && currentTarget.selection === null) {
-      await strapi.db.query('plugin::custom-upload.target-link').update({
-        where: {
-          id: currentTarget.id,
-        },
-        data: {
-          selection: 'default',
-        }
-      })
-      return 'default';
+      const firstTarget = await getFirstEntry('plugin::custom-upload.custom-upload');
+      await strapi.entityService.update("plugin::custom-upload.target-link", currentTarget.id, {data: { selection: firstTarget?.name}}); // it doesnt' want to see proper type here, no matter what i'am doing => see issue https://github.com/strapi/strapi/issues/18784
+      return firstTarget;
     }
 
     if (!currentTarget) {
-      currentTarget = 'default';
-      await strapi.db.query('plugin::custom-upload.target-link').create({
-        data: {
-          selection: 'default',
-        }
-      });
-      return 'default';
+      const firstTarget = (await getFirstEntry('plugin::custom-upload.custom-upload')); // strapi entity service output resulting types as AnyType || null, seems fixed in strapi 5.
+      await strapi.entityService.create("plugin::custom-upload.target-link", {data: { selection: firstTarget?.name}});
+      return firstTarget;
     }
     return currentTarget.selection;
   },
-  setCurrentTarget: async (ctx: koa.Request) => {
-    console.log('CTX', ctx.params);
-    let currentTarget = _.clone(await strapi.db.query('plugin::custom-upload.target-link').findOne());
+  setCurrentTarget: async (ctx: IRequest) => {
+    let currentTarget = await getFirstEntry('plugin::custom-upload.target-link');
     if (!currentTarget) {
-      await strapi.db.query('plugin::custom-upload.target-link').create({
-        data: {
-          selection: ctx.params.target,
-        }
-      });
+      await strapi.entityService.create("plugin::custom-upload.target-link", {data: { selection: ctx.params.target}});
     } else {
-      await strapi.db.query('plugin::custom-upload.target-link').update({
-        where: {
-          id: currentTarget.id,
-        },
-        data: {
-          selection: ctx.params.target,
-        }
-      })
+      await strapi.entityService.update("plugin::custom-upload.target-link", currentTarget.id, {data: { selection: ctx.params.target}});
     }
     return ctx.params.target;
   },

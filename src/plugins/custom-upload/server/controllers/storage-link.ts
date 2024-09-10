@@ -1,8 +1,10 @@
-import _ from 'lodash';
-
+import { Strapi } from "@strapi/strapi";
 export default {
   getAllTargets: async () => {
-    let targets = _.clone(await strapi.db.query('plugin::custom-upload.custom-upload').findMany()).map((target) => target.name);
-    return targets;
+    let targets = (await strapi.entityService.findMany('plugin::custom-upload.custom-upload'));
+    if (targets === null) {
+      return [];
+    }
+    return targets.map((target) => target.name);
   }
 }
