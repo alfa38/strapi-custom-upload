@@ -59,20 +59,14 @@ const HomePage = () => {
     get(`custom-upload/setCurrentTarget/${event.target.value}`).then((targetName) => setCurrentTarget(targetName)).catch((e) => console.log(e));
   }
   return (
-    <>
-      {/* <h1 className='container center-content test'>{pluginId}&apos;s HomePage</h1>
-      <p>Happy coding</p> */}
-      <span> Current Target</span>
-      <select value={currentTarget} onChange={onChangeHandler}>
-        {/* <option value={'test'}>
-          test
-        </option>
-        <option value={'second'}>second</option> */}
-        {targets.map((targetName) => {
-          return <option value={targetName}>{targetName}</option>
-        } )}
-      </select>
-      </> 
+      <div className='container'>
+        <h1 className='centered'> Current Target </h1>
+        <select className='centered' value={currentTarget} onChange={onChangeHandler}>
+          {targets.map((targetName) => {
+            return <option value={targetName}>{targetName}</option>
+          })}
+        </select>
+      </div>    
   );
 };
 

@@ -1,13 +1,10 @@
 .container {
   display: flex;
-  width: 80vw;
-  height: 80vh;
+  margin: 0;
+  padding: 300px 25%;
 }
 
-.center-content {
-  align-content: center;
-}
-
-.test {
-  background-color: red;
+.centered {
+  display: flex;
+  margin: 0 auto 10px;
 }
