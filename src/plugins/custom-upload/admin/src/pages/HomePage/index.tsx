@@ -5,10 +5,7 @@
  */
 import './index.css';
 import { useFetchClient } from '@strapi/helper-plugin';
-import pluginId from '../../pluginId';
-import React, { ChangeEventHandler, ReactEventHandler, useEffect, useState } from 'react';
-
-// import pluginId from '../../pluginId';
+import { useEffect, useState } from 'react';
 
 const getFetches = () => {
   const { get, put, post } = useFetchClient();
